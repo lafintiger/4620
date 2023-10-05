@@ -1,0 +1,24 @@
+#Stealthful scan
+#
+nmap -sS -f -Pn -T0 -D RND:10 --scan-delay 300s --max-retries 1 --randomize-hosts 192.168.17.0/24
+#
+
+To make the scan even less noisy and stealthier, you can employ some additional techniques. Here's a combination that will be much slower but aims to fly under the radar:
+
+bash
+nmap -sS -f -Pn -T0 -D RND:10 --scan-delay 300s --max-retries 1 192.168.17.0/24
+Explanation:
+    -T0: Paranoid timing. This will significantly reduce the speed of the scan.
+    --scan-delay 300s: This introduces a delay of 300 seconds (5 minutes) between probes.
+    --max-retries 1: This reduces the number of retries for each scan attempt to 1.
+This combination should make the scan very slow and much less noisy, making it harder for an IDS to detect. However, please be aware that the scan will take a very long time to complete due to the significant delays introduced. Adjust --scan-delay as needed based on your patience and requirements.
+
+The -D flag is used for decoy scanning in nmap. The idea behind decoy scanning is to make it appear as though multiple IP addresses are scanning the target, which can confuse and obscure the real source of the scan.
+
+The RND:10 specifically tells nmap to generate 10 random decoy IP addresses. This means nmap will use 10 randomly selected IP addresses, along with your real IP address, to disguise the scan's true origin.
+
+For example, if your IP is 1.1.1.1 and you use -D RND:10, the target might see scanning activity from 1.1.1.1 along with ten other random IPs. This makes it harder for the target to determine which IP is the real source of the scan.
+
+However, use decoys with caution. Some IDS/IPS systems might recognize the use of decoys as a form of evasion, which can raise alerts. Also, the random IPs selected by RND might belong to real organizations or entities, potentially causing unwanted side effects or drawing undue attention.
+If you'd like nmap to scan IP addresses in a random order rather than sequentially, you can use the --randomize-hosts option. This option will cause nmap to randomize the order in which it scans the target IP addresses.
+
