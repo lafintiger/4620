@@ -25,3 +25,5 @@ If you'd like nmap to scan IP addresses in a random order rather than sequential
 └─$ sgpt --chat enumerator --shell "run a comprehensive nmap vulnerability scan against the 192.168.17.* network"
 nmap -p- -A -T4 --script vuln 192.168.17.0/24
 
+sgpt --chat enumerator --shell "That was was still too noisy. Please make it more stealthful. Use sudo in the command."
+sudo nmap -sn -Pn -T2 -n -f -D RND:10 192.168.17.0/24
