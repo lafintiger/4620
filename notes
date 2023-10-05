@@ -22,3 +22,6 @@ For example, if your IP is 1.1.1.1 and you use -D RND:10, the target might see s
 However, use decoys with caution. Some IDS/IPS systems might recognize the use of decoys as a form of evasion, which can raise alerts. Also, the random IPs selected by RND might belong to real organizations or entities, potentially causing unwanted side effects or drawing undue attention.
 If you'd like nmap to scan IP addresses in a random order rather than sequentially, you can use the --randomize-hosts option. This option will cause nmap to randomize the order in which it scans the target IP addresses.
 
+└─$ sgpt --chat enumerator --shell "run a comprehensive nmap vulnerability scan against the 192.168.17.* network"
+nmap -p- -A -T4 --script vuln 192.168.17.0/24
+
